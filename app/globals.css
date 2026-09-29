@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --radius: 0px; /* the live card design is square-cornered throughout */
+  }
+
+  body {
+    @apply bg-white font-sans text-charcoal antialiased;
+  }
+
+  /* The sticky My Trip bar sits above the fold on mobile — keep content clear of it. */
+  body[data-trip-open="true"] {
+    overflow: hidden;
+  }
+}
+
+@layer utilities {
+  .card-overlay-gradient {
+    background: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.92) 0,
+      rgba(0, 0, 0, 0.85) 25%,
+      rgba(0, 0, 0, 0.7) 45%,
+      rgba(0, 0, 0, 0.45) 65%,
+      rgba(0, 0, 0, 0.2) 85%,
+      transparent
+    );
+  }
+}

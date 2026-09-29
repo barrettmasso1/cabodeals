@@ -1,0 +1,1676 @@
+{
+  "acre-resort": {
+    "name": "Acre Resort",
+    "aliases": [
+      "Acre",
+      "Acre Resort"
+    ],
+    "solmarGolferTier": null,
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": false,
+    "diamanteOk": true,
+    "listaDosOk": true,
+    "vgOk": true,
+    "notes": []
+  },
+  "acuario-los-cabos": {
+    "name": "Acuario Los Cabos",
+    "aliases": [
+      "Acuario Los Cabos"
+    ],
+    "solmarGolferTier": null,
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": false,
+    "diamanteOk": false,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": []
+  },
+  "airbnb-rental": {
+    "name": "Airbnb / VRBO / private rental",
+    "aliases": [
+      "Rentals Airbnb",
+      "Rentals AirBnB",
+      "Airbnb",
+      "Air B&B",
+      "VRBO",
+      "STR"
+    ],
+    "solmarGolferTier": null,
+    "solmarTier": null,
+    "solmarImOk": true,
+    "questroOk": false,
+    "questro5Star": false,
+    "diamanteOk": true,
+    "listaDosOk": null,
+    "vgOk": null,
+    "notes": [
+      "Tier is derived from nightly rate, not the property. Solmar golfer A at $200+/night; Solmar non-golfer A and IM at $150+/night; Diamante Lista #2 at $400+/night; VG at $125+/night."
+    ],
+    "isRental": true,
+    "rateRules": {
+      "solmarGolferTier": {
+        ">=200": "A"
+      },
+      "solmarTier": {
+        ">=150": "A"
+      },
+      "solmarImOk": {
+        ">=150": true
+      },
+      "listaDosOk": {
+        ">=400": true
+      },
+      "vgOk": {
+        ">=125": true
+      },
+      "diamanteOk": {
+        ">=400": true
+      }
+    }
+  },
+  "alegranza": {
+    "name": "Alegranza",
+    "aliases": [
+      "Alegranza"
+    ],
+    "solmarGolferTier": null,
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": false,
+    "diamanteOk": false,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": []
+  },
+  "bahia": {
+    "name": "Bahía Hotel & Beach Club",
+    "aliases": [
+      "Bahia",
+      "Bahía Condos",
+      "Bahía"
+    ],
+    "solmarGolferTier": null,
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": false,
+    "diamanteOk": true,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": []
+  },
+  "breathless": {
+    "name": "Breathless Cabo San Lucas",
+    "aliases": [
+      "Breathless",
+      "BL"
+    ],
+    "solmarGolferTier": "A",
+    "solmarTier": "C",
+    "solmarImOk": false,
+    "questroOk": false,
+    "questro5Star": false,
+    "diamanteOk": true,
+    "listaDosOk": true,
+    "vgOk": true,
+    "notes": [
+      "Questro INHOUSE-ONLY per HS-04 — not eligible as an outhouse street tour unless the guest moved here from another property."
+    ]
+  },
+  "cabo-azul": {
+    "name": "Cabo Azul Resort",
+    "aliases": [
+      "Cabo Azul"
+    ],
+    "solmarGolferTier": "A",
+    "solmarTier": "A",
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": true,
+    "diamanteOk": true,
+    "listaDosOk": true,
+    "vgOk": true,
+    "notes": []
+  },
+  "cabo-hacienda": {
+    "name": "Cabo Hacienda",
+    "aliases": [
+      "Cabo Hacienda"
+    ],
+    "solmarGolferTier": null,
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": false,
+    "questro5Star": false,
+    "diamanteOk": true,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": []
+  },
+  "cabo-surf": {
+    "name": "Cabo Surf Hotel",
+    "aliases": [
+      "Cabo Surf"
+    ],
+    "solmarGolferTier": "B",
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": true,
+    "diamanteOk": false,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": []
+  },
+  "cabo-viejo": {
+    "name": "Cabo Viejo",
+    "aliases": [
+      "Cabo Viejo"
+    ],
+    "solmarGolferTier": null,
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": false,
+    "diamanteOk": false,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": []
+  },
+  "casa-costa-azul": {
+    "name": "Casa Costa Azul",
+    "aliases": [
+      "Casa Costa Azul"
+    ],
+    "solmarGolferTier": null,
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": false,
+    "diamanteOk": false,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": []
+  },
+  "casa-del-mar": {
+    "name": "Zoëtry Casa del Mar",
+    "aliases": [
+      "Casa del Mar",
+      "Zoetry Casa del Mar",
+      "Zoëtry Casa de Mar",
+      "Casa de Mar",
+      "Zoetry"
+    ],
+    "solmarGolferTier": "A",
+    "solmarTier": "A",
+    "solmarImOk": false,
+    "questroOk": false,
+    "questro5Star": false,
+    "diamanteOk": true,
+    "listaDosOk": true,
+    "vgOk": true,
+    "notes": [
+      "Questro INHOUSE-ONLY per HS-04 — not eligible as an outhouse street tour unless the guest moved here from another property."
+    ]
+  },
+  "casa-dorada-cabo-real": {
+    "name": "Casa Dorada Cabo Real",
+    "aliases": [
+      "Casa Dorada Cabo Real"
+    ],
+    "solmarGolferTier": null,
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": false,
+    "diamanteOk": false,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": []
+  },
+  "casa-dorada-medano": {
+    "name": "Casa Dorada at Médano",
+    "aliases": [
+      "Casa Dorada",
+      "Casa Dorada at Medano",
+      "Casa Dorada El Médano",
+      "Casa Dorada Médano"
+    ],
+    "solmarGolferTier": "A",
+    "solmarTier": "C",
+    "solmarImOk": true,
+    "questroOk": false,
+    "questro5Star": false,
+    "diamanteOk": true,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": [
+      "Questro INHOUSE-ONLY per HS-04 — not eligible as an outhouse street tour unless the guest moved here from another property."
+    ]
+  },
+  "casa-natalia": {
+    "name": "Casa Natalia",
+    "aliases": [
+      "Casa Natalia"
+    ],
+    "solmarGolferTier": null,
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": false,
+    "diamanteOk": false,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": []
+  },
+  "chileno-bay": {
+    "name": "Chileno Bay Resort",
+    "aliases": [
+      "Chileno",
+      "Chileno Bay"
+    ],
+    "solmarGolferTier": "A",
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": false,
+    "diamanteOk": true,
+    "listaDosOk": true,
+    "vgOk": true,
+    "notes": []
+  },
+  "club-cascadas": {
+    "name": "Club Cascadas de Baja",
+    "aliases": [
+      "Club Cascadas",
+      "Cascadas",
+      "Club Cascadas de Baja"
+    ],
+    "solmarGolferTier": null,
+    "solmarTier": "A",
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": false,
+    "diamanteOk": true,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": []
+  },
+  "club-regina": {
+    "name": "Club Regina",
+    "aliases": [
+      "Club Regina"
+    ],
+    "solmarGolferTier": "A",
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": false,
+    "diamanteOk": true,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": []
+  },
+  "copala-sunset": {
+    "name": "Copala at Quivira",
+    "aliases": [
+      "Copala Sunset",
+      "Copala"
+    ],
+    "solmarGolferTier": "A",
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": false,
+    "questro5Star": false,
+    "diamanteOk": false,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": []
+  },
+  "coral-baja": {
+    "name": "Coral Baja",
+    "aliases": [
+      "Coral Baja",
+      "Coral Baja/Wyndham"
+    ],
+    "solmarGolferTier": "C",
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": false,
+    "diamanteOk": true,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": []
+  },
+  "corazon-cabo": {
+    "name": "Corazón Cabo (formerly Cabo Villas)",
+    "aliases": [
+      "Corazon Cabo",
+      "Cabo Villas",
+      "Cabo Villas/Cachet/Corazon",
+      "Cabo Villas/Corazon",
+      "Cachet",
+      "Corazón"
+    ],
+    "solmarGolferTier": "C",
+    "solmarTier": "B",
+    "solmarImOk": true,
+    "questroOk": true,
+    "questro5Star": false,
+    "diamanteOk": true,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": []
+  },
+  "diamante": {
+    "name": "Diamante Cabo San Lucas",
+    "aliases": [
+      "Diamante"
+    ],
+    "solmarGolferTier": "A",
+    "solmarTier": "A",
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": true,
+    "diamanteOk": true,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": []
+  },
+  "dreams": {
+    "name": "Dreams Los Cabos",
+    "aliases": [
+      "Dreams",
+      "DL"
+    ],
+    "solmarGolferTier": "A",
+    "solmarTier": "A",
+    "solmarImOk": false,
+    "questroOk": false,
+    "questro5Star": false,
+    "diamanteOk": true,
+    "listaDosOk": true,
+    "vgOk": true,
+    "notes": [
+      "Questro INHOUSE-ONLY per HS-04 — not eligible as an outhouse street tour unless the guest moved here from another property."
+    ]
+  },
+  "el-ganzo": {
+    "name": "Hotel El Ganzo",
+    "aliases": [
+      "El Ganzo"
+    ],
+    "solmarGolferTier": "C",
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": true,
+    "diamanteOk": true,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": []
+  },
+  "esperanza": {
+    "name": "Esperanza Punta Ballena",
+    "aliases": [
+      "Esperanza",
+      "Esperanza Punta Ballena"
+    ],
+    "solmarGolferTier": "A",
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": true,
+    "diamanteOk": true,
+    "listaDosOk": true,
+    "vgOk": true,
+    "notes": []
+  },
+  "fairfield-marriott": {
+    "name": "Fairfield by Marriott",
+    "aliases": [
+      "Fairfield Marriott",
+      "Fairfield Marriot"
+    ],
+    "solmarGolferTier": "B",
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": false,
+    "diamanteOk": false,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": []
+  },
+  "fiesta-americana": {
+    "name": "Fiesta Americana",
+    "aliases": [
+      "Fiesta Americana"
+    ],
+    "solmarGolferTier": "C",
+    "solmarTier": null,
+    "solmarImOk": true,
+    "questroOk": true,
+    "questro5Star": false,
+    "diamanteOk": true,
+    "listaDosOk": true,
+    "vgOk": true,
+    "notes": []
+  },
+  "fiesta-americana-grand": {
+    "name": "Fiesta Americana Grand",
+    "aliases": [
+      "Fiesta Americana Grand"
+    ],
+    "solmarGolferTier": null,
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": false,
+    "diamanteOk": false,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": []
+  },
+  "flora-farm": {
+    "name": "Flora Farms",
+    "aliases": [
+      "Flora Farm",
+      "Flora Farms"
+    ],
+    "solmarGolferTier": null,
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": false,
+    "questro5Star": false,
+    "diamanteOk": true,
+    "listaDosOk": true,
+    "vgOk": true,
+    "notes": []
+  },
+  "four-seasons": {
+    "name": "Four Seasons Cabo del Sol",
+    "aliases": [
+      "Four Seasons",
+      "Four Season Cabo del Sol",
+      "Four Seasons Cabo Del Sol"
+    ],
+    "solmarGolferTier": null,
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": false,
+    "diamanteOk": true,
+    "listaDosOk": true,
+    "vgOk": true,
+    "notes": []
+  },
+  "garza-blanca": {
+    "name": "Garza Blanca Resort",
+    "aliases": [
+      "Garza Blanca",
+      "Gaza Blanca"
+    ],
+    "solmarGolferTier": "A",
+    "solmarTier": "A",
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": true,
+    "diamanteOk": true,
+    "listaDosOk": true,
+    "vgOk": true,
+    "notes": []
+  },
+  "gr-solaris-lighthouse": {
+    "name": "GR Solaris Lighthouse (formerly Barceló Grand Faro)",
+    "aliases": [
+      "GR Solaris Lighthouse",
+      "GR Solaris",
+      "Grand Faro",
+      "Barcelo Grand Faro"
+    ],
+    "solmarGolferTier": "C",
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": false,
+    "diamanteOk": true,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": []
+  },
+  "grand-solmar-lands-end": {
+    "name": "Grand Solmar Lands End",
+    "aliases": [
+      "Grand Solmar Lands End",
+      "Solmar",
+      "Lands End"
+    ],
+    "solmarGolferTier": null,
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": false,
+    "diamanteOk": true,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": []
+  },
+  "grand-solmar-rancho-san-lucas": {
+    "name": "Grand Solmar at Rancho San Lucas",
+    "aliases": [
+      "Grand Solmar",
+      "Grand Solmar at Rancho San Lucas",
+      "Grand Solmar / Rancho San Lucas",
+      "Rancho San Lucas"
+    ],
+    "solmarGolferTier": "A",
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": true,
+    "diamanteOk": true,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": []
+  },
+  "grand-velas": {
+    "name": "Grand Velas Los Cabos",
+    "aliases": [
+      "Grand Velas",
+      "Gran Velas"
+    ],
+    "solmarGolferTier": "A",
+    "solmarTier": "A",
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": true,
+    "diamanteOk": true,
+    "listaDosOk": true,
+    "vgOk": true,
+    "notes": []
+  },
+  "hacienda-beach": {
+    "name": "Hacienda Beach Club & Residences",
+    "aliases": [
+      "Hacienda Beach"
+    ],
+    "solmarGolferTier": "A",
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": true,
+    "diamanteOk": true,
+    "listaDosOk": true,
+    "vgOk": true,
+    "notes": []
+  },
+  "hacienda-del-mar": {
+    "name": "Sheraton Grand Hacienda del Mar",
+    "aliases": [
+      "Hacienda del Mar",
+      "Sheraton Hacienda del Mar",
+      "Sheraton",
+      "Hacienda del Mar / Sheraton"
+    ],
+    "solmarGolferTier": "A",
+    "solmarTier": "A",
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": false,
+    "diamanteOk": true,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": []
+  },
+  "hacienda-encantada": {
+    "name": "Hacienda Encantada",
+    "aliases": [
+      "Hacienda Encantada",
+      "Hac Encantada",
+      "Vista Encantada",
+      "El Encanto",
+      "Residencias"
+    ],
+    "solmarGolferTier": "A",
+    "solmarTier": "A",
+    "solmarImOk": true,
+    "questroOk": true,
+    "questro5Star": true,
+    "diamanteOk": true,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": []
+  },
+  "hard-rock": {
+    "name": "Hard Rock Hotel Los Cabos",
+    "aliases": [
+      "Hard Rock",
+      "Hard Rock Hotel"
+    ],
+    "solmarGolferTier": "A",
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": true,
+    "diamanteOk": true,
+    "listaDosOk": true,
+    "vgOk": true,
+    "notes": []
+  },
+  "hilton": {
+    "name": "Hilton Los Cabos",
+    "aliases": [
+      "Hilton",
+      "Hilton/Pacifica",
+      "Pacifica by Hilton",
+      "El Encanto by Hilton"
+    ],
+    "solmarGolferTier": "B",
+    "solmarTier": "C",
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": true,
+    "diamanteOk": true,
+    "listaDosOk": true,
+    "vgOk": true,
+    "notes": []
+  },
+  "holiday-inn": {
+    "name": "Holiday Inn",
+    "aliases": [
+      "Holiday Inn",
+      "Holiday Inn Express"
+    ],
+    "solmarGolferTier": null,
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": false,
+    "questro5Star": false,
+    "diamanteOk": false,
+    "listaDosOk": false,
+    "vgOk": false,
+    "notes": [
+      "Not authorized by Questro HS-04 (N/A in every column)."
+    ]
+  },
+  "hyatt-ziva": {
+    "name": "Hyatt Ziva Los Cabos",
+    "aliases": [
+      "Hyatt Ziva"
+    ],
+    "solmarGolferTier": "B",
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": false,
+    "diamanteOk": true,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": []
+  },
+  "jw-marriott": {
+    "name": "JW Marriott Los Cabos",
+    "aliases": [
+      "JW Marriott",
+      "JW Marriot",
+      "J.W. Marriot"
+    ],
+    "solmarGolferTier": "C",
+    "solmarTier": "C",
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": true,
+    "diamanteOk": true,
+    "listaDosOk": true,
+    "vgOk": true,
+    "notes": []
+  },
+  "krystal-grand": {
+    "name": "Krystal Grand Los Cabos",
+    "aliases": [
+      "Krystal Grand",
+      "Grand Krystal",
+      "Grand Krystal"
+    ],
+    "solmarGolferTier": "C",
+    "solmarTier": "C",
+    "solmarImOk": true,
+    "questroOk": true,
+    "questro5Star": false,
+    "diamanteOk": true,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": []
+  },
+  "las-residencias": {
+    "name": "Las Residencias Los Cabos",
+    "aliases": [
+      "Las Residencias"
+    ],
+    "solmarGolferTier": null,
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": false,
+    "diamanteOk": false,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": []
+  },
+  "las-ventanas": {
+    "name": "Las Ventanas al Paraíso",
+    "aliases": [
+      "Las Ventanas",
+      "Las Ventanas/Rosewood",
+      "Las Ventanas al Paraiso",
+      "Rosewood"
+    ],
+    "solmarGolferTier": "A",
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": true,
+    "diamanteOk": true,
+    "listaDosOk": true,
+    "vgOk": true,
+    "notes": []
+  },
+  "le-blanc": {
+    "name": "Le Blanc Spa Resort",
+    "aliases": [
+      "Le Blanc"
+    ],
+    "solmarGolferTier": "A",
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": true,
+    "diamanteOk": true,
+    "listaDosOk": true,
+    "vgOk": true,
+    "notes": []
+  },
+  "live-aqua": {
+    "name": "Live Aqua Los Cabos",
+    "aliases": [
+      "Live Aqua"
+    ],
+    "solmarGolferTier": null,
+    "solmarTier": "A",
+    "solmarImOk": false,
+    "questroOk": false,
+    "questro5Star": false,
+    "diamanteOk": false,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": []
+  },
+  "los-cabos-country-club": {
+    "name": "Los Cabos Country Club",
+    "aliases": [
+      "Los Cabos Country Club",
+      "Country Club"
+    ],
+    "solmarGolferTier": "C",
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": false,
+    "diamanteOk": false,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": []
+  },
+  "mar-del-cabo": {
+    "name": "Mar del Cabo",
+    "aliases": [
+      "Mar del Cabo"
+    ],
+    "solmarGolferTier": null,
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": false,
+    "diamanteOk": true,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": []
+  },
+  "marina-fiesta": {
+    "name": "Marina Fiesta Resort",
+    "aliases": [
+      "Marina Fiesta"
+    ],
+    "solmarGolferTier": "C",
+    "solmarTier": "B",
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": false,
+    "diamanteOk": false,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": []
+  },
+  "marquis": {
+    "name": "Marquis Los Cabos",
+    "aliases": [
+      "Marquis",
+      "Marquis Hotel",
+      "Secrets Marquis",
+      "Secrets Marquis Los Cabos"
+    ],
+    "solmarGolferTier": "B",
+    "solmarTier": "A",
+    "solmarImOk": false,
+    "questroOk": false,
+    "questro5Star": true,
+    "diamanteOk": true,
+    "listaDosOk": true,
+    "vgOk": true,
+    "notes": [
+      "Questro INHOUSE-ONLY per HS-04 — not eligible as an outhouse street tour unless the guest moved here from another property."
+    ]
+  },
+  "me-cabo": {
+    "name": "ME Cabo",
+    "aliases": [
+      "ME Cabo",
+      "Me Cabo"
+    ],
+    "solmarGolferTier": null,
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": false,
+    "diamanteOk": true,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": []
+  },
+  "medano-hotel": {
+    "name": "Médano Hotel & Suites",
+    "aliases": [
+      "Medano Hotel & Suites",
+      "El Médano",
+      "El Medano"
+    ],
+    "solmarGolferTier": null,
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": false,
+    "diamanteOk": true,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": []
+  },
+  "montage": {
+    "name": "Montage Los Cabos",
+    "aliases": [
+      "Montage"
+    ],
+    "solmarGolferTier": "A",
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": true,
+    "diamanteOk": true,
+    "listaDosOk": true,
+    "vgOk": true,
+    "notes": []
+  },
+  "montecristo": {
+    "name": "Pueblo Bonito Montecristo",
+    "aliases": [
+      "Montecristo",
+      "Pueblo Bonito Monte Cristo",
+      "Pueblo Bonito Montecristo"
+    ],
+    "solmarGolferTier": "A",
+    "solmarTier": "A",
+    "solmarImOk": true,
+    "questroOk": true,
+    "questro5Star": true,
+    "diamanteOk": true,
+    "listaDosOk": true,
+    "vgOk": true,
+    "notes": []
+  },
+  "nobu": {
+    "name": "Nobu Hotel Los Cabos",
+    "aliases": [
+      "Nobu"
+    ],
+    "solmarGolferTier": "A",
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": true,
+    "diamanteOk": true,
+    "listaDosOk": true,
+    "vgOk": true,
+    "notes": []
+  },
+  "one-medano-beach": {
+    "name": "One Medano Beach Resort",
+    "aliases": [
+      "One Medano Beach",
+      "One Medano Beach Resort"
+    ],
+    "solmarGolferTier": null,
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": false,
+    "diamanteOk": false,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": []
+  },
+  "palmilla": {
+    "name": "One&Only Palmilla",
+    "aliases": [
+      "Palmilla",
+      "One & Only Palmilla",
+      "One&Only Palmilla"
+    ],
+    "solmarGolferTier": "A",
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": true,
+    "diamanteOk": true,
+    "listaDosOk": true,
+    "vgOk": true,
+    "notes": []
+  },
+  "paradisus": {
+    "name": "Paradisus Los Cabos (formerly Meliá Cabo Real)",
+    "aliases": [
+      "Paradisus",
+      "Paradisus Los Cabos",
+      "Melia Cabo Real",
+      "Melia Cabo real"
+    ],
+    "solmarGolferTier": "B",
+    "solmarTier": "C",
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": false,
+    "diamanteOk": true,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": []
+  },
+  "park-hyatt-cabo-del-sol": {
+    "name": "Park Hyatt Cabo del Sol",
+    "aliases": [
+      "Park Hyatt Cabo del Sol",
+      "Hyatt Cabo del Sol"
+    ],
+    "solmarGolferTier": null,
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": false,
+    "questro5Star": false,
+    "diamanteOk": true,
+    "listaDosOk": true,
+    "vgOk": true,
+    "notes": []
+  },
+  "park-royal": {
+    "name": "Park Royal Los Cabos",
+    "aliases": [
+      "Park Royal"
+    ],
+    "solmarGolferTier": "C",
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": false,
+    "questro5Star": false,
+    "diamanteOk": true,
+    "listaDosOk": false,
+    "vgOk": false,
+    "notes": [
+      "Not authorized by Questro HS-04 (N/A in every column)."
+    ]
+  },
+  "pb-blanco": {
+    "name": "Pueblo Bonito Los Cabos (Blanco)",
+    "aliases": [
+      "Pueblo Bonito Blanco",
+      "PB Blanco",
+      "PB Blanca",
+      "Pueblo Bonito Los Cabos (Blanco)",
+      "Pueblo Bonito Los Cabos"
+    ],
+    "solmarGolferTier": "B",
+    "solmarTier": "A",
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": false,
+    "diamanteOk": false,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": []
+  },
+  "pb-nueva-espana": {
+    "name": "Pueblo Bonito Nueva España",
+    "aliases": [
+      "Pueblo Bonito Nueva Espana",
+      "PB Nueva España"
+    ],
+    "solmarGolferTier": null,
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": false,
+    "questro5Star": false,
+    "diamanteOk": true,
+    "listaDosOk": true,
+    "vgOk": true,
+    "notes": []
+  },
+  "pb-pacifica": {
+    "name": "Pueblo Bonito Pacifica",
+    "aliases": [
+      "Pueblo Bonito Pacifica",
+      "PB Pacifica"
+    ],
+    "solmarGolferTier": "A",
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": false,
+    "diamanteOk": true,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": []
+  },
+  "pb-rose": {
+    "name": "Pueblo Bonito Rosé",
+    "aliases": [
+      "Pueblo Bonito Rose",
+      "PB Rose",
+      "Pueblo Bonito Rosé"
+    ],
+    "solmarGolferTier": "A",
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": false,
+    "diamanteOk": true,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": []
+  },
+  "pb-sunset": {
+    "name": "Pueblo Bonito Sunset Beach",
+    "aliases": [
+      "Pueblo Bonito Sunset",
+      "PB Sunset",
+      "Pueblo Bonito Sunset Beach"
+    ],
+    "solmarGolferTier": "A",
+    "solmarTier": "B",
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": false,
+    "diamanteOk": true,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": []
+  },
+  "pedregal": {
+    "name": "Waldorf Astoria Los Cabos Pedregal",
+    "aliases": [
+      "Pedregal",
+      "Waldorf Astoria",
+      "Waldorf",
+      "Waldorf Astoria Pedregal"
+    ],
+    "solmarGolferTier": "A",
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": false,
+    "questro5Star": false,
+    "diamanteOk": true,
+    "listaDosOk": true,
+    "vgOk": true,
+    "notes": []
+  },
+  "playa-grande": {
+    "name": "Playa Grande Resort",
+    "aliases": [
+      "Playa Grande",
+      "Playa Grande Resort",
+      "The Ridge"
+    ],
+    "solmarGolferTier": "A",
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": false,
+    "diamanteOk": true,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": []
+  },
+  "porto-fino": {
+    "name": "Porto Fino",
+    "aliases": [
+      "Porto Fino"
+    ],
+    "solmarGolferTier": null,
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": false,
+    "diamanteOk": false,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": []
+  },
+  "posada-real": {
+    "name": "Posada Real",
+    "aliases": [
+      "Posada Real"
+    ],
+    "solmarGolferTier": null,
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": false,
+    "questro5Star": false,
+    "diamanteOk": false,
+    "listaDosOk": false,
+    "vgOk": false,
+    "notes": [
+      "Not authorized by Questro HS-04 (N/A in every column)."
+    ]
+  },
+  "private-residence": {
+    "name": "Private Residence",
+    "aliases": [
+      "Private Residence"
+    ],
+    "solmarGolferTier": null,
+    "solmarTier": null,
+    "solmarImOk": true,
+    "questroOk": false,
+    "questro5Star": false,
+    "diamanteOk": true,
+    "listaDosOk": null,
+    "vgOk": null,
+    "notes": [
+      "A category, not a specific property (a $200 condo or a $2,000 villa). Tiering comes from the nightly rate, same rules as airbnb-rental, unless the residence sits inside a listed resort."
+    ],
+    "isRental": true,
+    "rateRules": {
+      "solmarGolferTier": {
+        ">=200": "A"
+      },
+      "solmarTier": {
+        ">=150": "A"
+      },
+      "solmarImOk": {
+        ">=150": true
+      },
+      "listaDosOk": {
+        ">=400": true
+      },
+      "vgOk": {
+        ">=125": true
+      },
+      "diamanteOk": {
+        ">=400": true
+      }
+    }
+  },
+  "quivira": {
+    "name": "Quivira Los Cabos",
+    "aliases": [
+      "Quivira"
+    ],
+    "solmarGolferTier": null,
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": false,
+    "diamanteOk": false,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": []
+  },
+  "ritz-carlton": {
+    "name": "The Ritz-Carlton Zadún",
+    "aliases": [
+      "Ritz Carlton",
+      "The Ritz Carlton",
+      "Zadun",
+      "Zadum / Ritz Carlton",
+      "Zadún"
+    ],
+    "solmarGolferTier": null,
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": true,
+    "diamanteOk": true,
+    "listaDosOk": true,
+    "vgOk": true,
+    "notes": []
+  },
+  "riu-baja-california": {
+    "name": "Riu Baja California",
+    "aliases": [
+      "Riu Baja California Sur",
+      "Riu Baja California",
+      "Riu California"
+    ],
+    "solmarGolferTier": "A",
+    "solmarTier": "A",
+    "solmarImOk": true,
+    "questroOk": true,
+    "questro5Star": false,
+    "diamanteOk": true,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": []
+  },
+  "riu-palace": {
+    "name": "Riu Palace Baja California",
+    "aliases": [
+      "Riu Palace",
+      "Riu Palace Hotel"
+    ],
+    "solmarGolferTier": "A",
+    "solmarTier": "C",
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": false,
+    "diamanteOk": true,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": []
+  },
+  "riu-santa-fe": {
+    "name": "Riu Santa Fe",
+    "aliases": [
+      "Riu Santa Fe",
+      "Riu Santa Fe Hotel"
+    ],
+    "solmarGolferTier": "A",
+    "solmarTier": "B",
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": false,
+    "diamanteOk": true,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": []
+  },
+  "royal-decameron": {
+    "name": "Royal Decameron Los Cabos",
+    "aliases": [
+      "Royal Decameron",
+      "Royal de Cameron"
+    ],
+    "solmarGolferTier": "B",
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": false,
+    "diamanteOk": true,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": []
+  },
+  "royal-solaris": {
+    "name": "Royal Solaris Los Cabos",
+    "aliases": [
+      "Royal Solaris",
+      "Royal Solaris Hotel"
+    ],
+    "solmarGolferTier": "B",
+    "solmarTier": "A",
+    "solmarImOk": true,
+    "questroOk": true,
+    "questro5Star": false,
+    "diamanteOk": true,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": []
+  },
+  "sandos-finisterra": {
+    "name": "Sandos Finisterra",
+    "aliases": [
+      "Sandos Finisterra",
+      "Finisterra",
+      "Finisterra / Sandos"
+    ],
+    "solmarGolferTier": "C",
+    "solmarTier": "C",
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": false,
+    "diamanteOk": true,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": []
+  },
+  "secrets-puerto-los-cabos": {
+    "name": "Secrets Puerto Los Cabos",
+    "aliases": [
+      "Secrets Puerto Los Cabos",
+      "Secrets",
+      "SP"
+    ],
+    "solmarGolferTier": "B",
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": false,
+    "questro5Star": false,
+    "diamanteOk": true,
+    "listaDosOk": true,
+    "vgOk": true,
+    "notes": [
+      "Questro INHOUSE-ONLY per HS-04 — not eligible as an outhouse street tour unless the guest moved here from another property."
+    ]
+  },
+  "serena-del-mar": {
+    "name": "Serena del Mar",
+    "aliases": [
+      "Serena del Mar"
+    ],
+    "solmarGolferTier": "A",
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": false,
+    "questro5Star": false,
+    "diamanteOk": false,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": []
+  },
+  "sirena-del-mar": {
+    "name": "Sirena del Mar by Welk",
+    "aliases": [
+      "Sirena del Mar",
+      "Sirena Del Mar/Hyatt",
+      "Sirena del Mar / Welk",
+      "Welk"
+    ],
+    "solmarGolferTier": "A",
+    "solmarTier": "A",
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": false,
+    "diamanteOk": true,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": []
+  },
+  "solaz": {
+    "name": "Solaz, a Luxury Collection Resort",
+    "aliases": [
+      "Solaz"
+    ],
+    "solmarGolferTier": "B",
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": true,
+    "diamanteOk": true,
+    "listaDosOk": true,
+    "vgOk": true,
+    "notes": []
+  },
+  "st-regis": {
+    "name": "St. Regis Punta Mita / Los Cabos",
+    "aliases": [
+      "St Regis",
+      "St. Regis"
+    ],
+    "solmarGolferTier": null,
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": false,
+    "questro5Star": false,
+    "diamanteOk": true,
+    "listaDosOk": true,
+    "vgOk": true,
+    "notes": []
+  },
+  "terrasol": {
+    "name": "Terrasol Beach Resort",
+    "aliases": [
+      "Terrasol",
+      "Terraso"
+    ],
+    "solmarGolferTier": "B",
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": false,
+    "questro5Star": false,
+    "diamanteOk": true,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": []
+  },
+  "tesoro": {
+    "name": "Tesoro Los Cabos",
+    "aliases": [
+      "Tesoro",
+      "Tesoro / Wyndham"
+    ],
+    "solmarGolferTier": null,
+    "solmarTier": "C",
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": false,
+    "diamanteOk": false,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": []
+  },
+  "the-cape": {
+    "name": "The Cape, a Thompson Hotel",
+    "aliases": [
+      "The Cape",
+      "Cape",
+      "The Cape at Thompson"
+    ],
+    "solmarGolferTier": "C",
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": true,
+    "diamanteOk": true,
+    "listaDosOk": true,
+    "vgOk": true,
+    "notes": []
+  },
+  "tropicana-inn": {
+    "name": "Tropicana Inn",
+    "aliases": [
+      "Tropicana Inn"
+    ],
+    "solmarGolferTier": null,
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": false,
+    "diamanteOk": false,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": []
+  },
+  "velas-boutique": {
+    "name": "Velas Boutique",
+    "aliases": [
+      "Velas Boutique"
+    ],
+    "solmarGolferTier": null,
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": false,
+    "questro5Star": false,
+    "diamanteOk": true,
+    "listaDosOk": true,
+    "vgOk": true,
+    "notes": []
+  },
+  "viceroy": {
+    "name": "Viceroy Los Cabos",
+    "aliases": [
+      "Viceroy",
+      "Viceroy at Mar Adentro",
+      "Viceroy at Sunset"
+    ],
+    "solmarGolferTier": "A",
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": true,
+    "diamanteOk": true,
+    "listaDosOk": true,
+    "vgOk": true,
+    "notes": []
+  },
+  "vidanta": {
+    "name": "Vidanta Los Cabos / Grand Mayan",
+    "aliases": [
+      "Vidanta",
+      "Grand Mayan",
+      "Grand Mayan/Palace/Vidanta",
+      "Gran Mayan",
+      "Vidanta / Gran Mayan",
+      "Grand Mayan/PalaceVidanata"
+    ],
+    "solmarGolferTier": "B",
+    "solmarTier": "C",
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": true,
+    "diamanteOk": true,
+    "listaDosOk": true,
+    "vgOk": true,
+    "notes": []
+  },
+  "vidanta-east-cape": {
+    "name": "Vidanta East Cape",
+    "aliases": [
+      "Vidanta East Cape"
+    ],
+    "solmarGolferTier": null,
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": true,
+    "diamanteOk": false,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": []
+  },
+  "villa-del-arco": {
+    "name": "Villa del Arco",
+    "aliases": [
+      "Villa del Arco",
+      "V del Arco",
+      "Villas del Arco",
+      "Villa del Arco VG",
+      "VDA"
+    ],
+    "solmarGolferTier": "A",
+    "solmarTier": "B",
+    "solmarImOk": true,
+    "questroOk": true,
+    "questro5Star": false,
+    "diamanteOk": true,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": []
+  },
+  "villa-del-palmar": {
+    "name": "Villa del Palmar",
+    "aliases": [
+      "Villas del Palmar",
+      "V del Palmar",
+      "Villa del Palmar",
+      "Villa del Palmar VG",
+      "VDP"
+    ],
+    "solmarGolferTier": "B",
+    "solmarTier": "A",
+    "solmarImOk": false,
+    "questroOk": true,
+    "questro5Star": false,
+    "diamanteOk": true,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": []
+  },
+  "villa-la-estancia": {
+    "name": "Villa La Estancia",
+    "aliases": [
+      "Villa Estancia",
+      "V de Estancia",
+      "Villa La Estancia",
+      "Villa La Estancia VG",
+      "VLE"
+    ],
+    "solmarGolferTier": "B",
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": false,
+    "questro5Star": false,
+    "diamanteOk": true,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": []
+  },
+  "villa-la-valencia": {
+    "name": "Villa La Valencia",
+    "aliases": [
+      "Villa La Valencia",
+      "Villa Valencia",
+      "Villa la Valencia",
+      "Villa La Valencia VG",
+      "VLV"
+    ],
+    "solmarGolferTier": "A",
+    "solmarTier": "B",
+    "solmarImOk": true,
+    "questroOk": true,
+    "questro5Star": false,
+    "diamanteOk": true,
+    "listaDosOk": true,
+    "vgOk": true,
+    "notes": []
+  },
+  "westin": {
+    "name": "Westin Los Cabos",
+    "aliases": [
+      "Westin",
+      "Westin Regina",
+      "Club Regina / Baja Point",
+      "Westin Regina / Club Regina / Baja Point"
+    ],
+    "solmarGolferTier": "A",
+    "solmarTier": null,
+    "solmarImOk": false,
+    "questroOk": false,
+    "questro5Star": false,
+    "diamanteOk": true,
+    "listaDosOk": false,
+    "vgOk": true,
+    "notes": []
+  }
+}
