@@ -8,7 +8,7 @@
  * `cartItemsJson` because payload.ts stringifies the items as given.
  */
 import type { CartItem } from "@/lib/qualify"
-import type { Activity } from "@/data/activities"
+import { findActivity, type Activity } from "@/data/activities"
 
 export type TripItem = CartItem & {
   /** "Roughly when?" — free text, one per activity. Optional. */
@@ -68,3 +68,30 @@ export const priceUnit = (a: Activity) => a.perGroup ?? "per adult"
 export const minAgeLabel = (a: Activity) => `Min ${a.minAge} ${a.minAge === 1 ? "year" : "years"} old`
 
 export const tripGuests = (item: TripItem) => item.adults + item.children
+
+export const TRIP_STORAGE_KEY = "cabodeals.trip"
+
+/**
+ * The trip as the grid left it. Only ids still in the catalog survive — a stale trip would
+ * price wrong. Storage can throw (private mode, blocked site data), so this never rejects.
+ */
+export function readStoredTrip(): TripItem[] {
+  if (typeof window === "undefined") return []
+  try {
+    const raw = window.sessionStorage.getItem(TRIP_STORAGE_KEY)
+    if (!raw) return []
+    const parsed: unknown = JSON.parse(raw)
+    if (!Array.isArray(parsed)) return []
+    return (parsed as TripItem[]).filter((i) => i && typeof i.id === "string" && findActivity(i.id))
+  } catch {
+    return []
+  }
+}
+
+export function writeStoredTrip(items: TripItem[]) {
+  try {
+    window.sessionStorage.setItem(TRIP_STORAGE_KEY, JSON.stringify(items))
+  } catch {
+    // Private mode or a full quota — the trip just doesn't survive a reload.
+  }
+}

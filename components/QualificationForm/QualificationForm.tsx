@@ -586,7 +586,7 @@ export function QualificationForm(props: QualificationFormProps) {
             submit()
           }}
         >
-          <Disclosure rewardPhrase={rewardPhrase} />
+          <Disclosure rewardPhrase={rewardPhrase} closing={props.disclosureClosing} />
           {sections.slice(0, revealed).map(renderSection)}
         </form>
 

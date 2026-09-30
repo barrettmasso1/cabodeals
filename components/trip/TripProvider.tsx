@@ -3,9 +3,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react"
 import { ACTIVITIES, findActivity, type Activity } from "@/data/activities"
 import { track } from "@/lib/track"
-import { itemFromActivity, tripSavings, tripTotal, type TripItem } from "@/lib/trip"
-
-const STORAGE_KEY = "cabodeals.trip"
+import { itemFromActivity, readStoredTrip, tripSavings, tripTotal, writeStoredTrip, type TripItem } from "@/lib/trip"
 
 type TripContextValue = {
   items: TripItem[]
@@ -23,20 +21,6 @@ type TripContextValue = {
 
 const TripContext = createContext<TripContextValue | null>(null)
 
-/** Only ids still in the catalog survive a reload — a stale trip would price wrong. */
-function readStored(): TripItem[] {
-  if (typeof window === "undefined") return []
-  try {
-    const raw = window.sessionStorage.getItem(STORAGE_KEY)
-    if (!raw) return []
-    const parsed: unknown = JSON.parse(raw)
-    if (!Array.isArray(parsed)) return []
-    return (parsed as TripItem[]).filter((i) => i && typeof i.id === "string" && findActivity(i.id))
-  } catch {
-    return []
-  }
-}
-
 export function TripProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<TripItem[]>([])
   const [expanded, setExpanded] = useState(false)
@@ -44,17 +28,13 @@ export function TripProvider({ children }: { children: React.ReactNode }) {
   const hydrated = useRef(false)
 
   useEffect(() => {
-    setItems(readStored())
+    setItems(readStoredTrip())
     hydrated.current = true
   }, [])
 
   useEffect(() => {
     if (!hydrated.current) return
-    try {
-      window.sessionStorage.setItem(STORAGE_KEY, JSON.stringify(items))
-    } catch {
-      // Private mode or a full quota — the trip just doesn't survive a reload.
-    }
+    writeStoredTrip(items)
   }, [items])
 
   const savingsTotal = useMemo(() => tripSavings(items, findActivity), [items])

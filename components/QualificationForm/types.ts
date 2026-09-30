@@ -115,6 +115,8 @@ export type QualificationFormProps = {
   offer: Offer
   /** Fills "that's what gets you ___" in the disclosure. Defaults from `offer`. */
   rewardPhrase?: string
+  /** A fourth disclosure line. cabodeals uses it for the pay-at-the-resort rule (§5.5). */
+  disclosureClosing?: string
   /** Where payloads are POSTed. The route forwards to GHL_WEBHOOK_URL. */
   endpoint?: string
   /**
