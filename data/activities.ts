@@ -50,6 +50,8 @@ export type Activity = {
   minAge: number
   image: string
   featured?: boolean
+  /** False keeps a tour in the file but off the grid. Default is listed. */
+  listed?: boolean
   onSiteFees?: OnSiteFee[]
 }
 
@@ -299,19 +301,6 @@ export const ACTIVITIES: Activity[] = [
     onSiteFees: [PARK_ENTRANCE],
   },
   {
-    id: "private-yacht-experience",
-    name: "CABO PRIVATE YACHT EXPERIENCE",
-    categories: ["water", "sunset"],
-    ourPrice: 1329,
-    publicPrice: 1899,
-    perGroup: "per charter, up to 6 guests",
-    duration: "Varies",
-    minAge: 5,
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1.jfif-fFb8e9i1VW3yvYjHmrP87gsm26YTam.jpeg",
-    featured: true,
-    onSiteFees: [DOCK_FEE],
-  },
-  {
     id: "whale-shark-experience",
     name: "SWIMMING WITH WHALE SHARKS IN CABO EXPERIENCE",
     categories: ["water", "adventure"],
@@ -354,6 +343,8 @@ export const ACTIVITIES: Activity[] = [
     categories: ["water"],
     ourPrice: 378,
     publicPrice: 399,
+    // Vendor margin is so thin this lists at 5% off; held back rather than shown as a weak deal.
+    listed: false,
     duration: "72 Hours",
     minAge: 15,
     image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1.jfif-yMW7RbIpkWbgsAgovNGxFhMQZgF6yA.jpeg",
@@ -366,6 +357,8 @@ export const ACTIVITIES: Activity[] = [
     categories: ["water"],
     ourPrice: 491,
     publicPrice: 519,
+    // Vendor margin is so thin this lists at 5% off; held back rather than shown as a weak deal.
+    listed: false,
     duration: "72 Hours",
     minAge: 10,
     image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/3.jfif-Ki1pt1yAMPpFk13FKYag8ezaY9y5yc.jpeg",
@@ -397,6 +390,9 @@ export const ACTIVITIES: Activity[] = [
     onSiteFees: [DOCK_FEE],
   },
 ]
+
+/** What the grid sells. A held-back tour stays in the file but off the site. */
+export const LISTED_ACTIVITIES = ACTIVITIES.filter((a) => a.listed !== false)
 
 export const discountPercent = (a: Pick<Activity, "ourPrice" | "publicPrice">) =>
   Math.round((1 - a.ourPrice / a.publicPrice) * 100)

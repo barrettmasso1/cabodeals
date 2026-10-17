@@ -1,7 +1,7 @@
 "use client"
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react"
-import { ACTIVITIES, findActivity, type Activity } from "@/data/activities"
+import { findActivity, LISTED_ACTIVITIES, type Activity } from "@/data/activities"
 import { track } from "@/lib/track"
 import { itemFromActivity, readStoredTrip, tripSavings, tripTotal, writeStoredTrip, type TripItem } from "@/lib/trip"
 
@@ -77,4 +77,4 @@ export function useTrip() {
   return ctx
 }
 
-export const catalogCount = ACTIVITIES.length
+export const catalogCount = LISTED_ACTIVITIES.length

@@ -1,7 +1,7 @@
 "use client"
 
 import { useMemo, useState } from "react"
-import { ACTIVITIES, CATEGORIES, type Activity, type Category } from "@/data/activities"
+import { CATEGORIES, LISTED_ACTIVITIES, type Activity, type Category } from "@/data/activities"
 import { track } from "@/lib/track"
 import { useTrip } from "@/components/trip/TripProvider"
 import { ActivityCard } from "./ActivityCard"
@@ -15,11 +15,11 @@ export function ActivityGrid() {
 
   const counts = useMemo(() => {
     const map = new Map<Category, number>()
-    for (const a of ACTIVITIES) for (const c of a.categories) map.set(c, (map.get(c) ?? 0) + 1)
+    for (const a of LISTED_ACTIVITIES) for (const c of a.categories) map.set(c, (map.get(c) ?? 0) + 1)
     return map
   }, [])
 
-  const shown = filter === "all" ? ACTIVITIES : ACTIVITIES.filter((a) => a.categories.includes(filter))
+  const shown = filter === "all" ? LISTED_ACTIVITIES : LISTED_ACTIVITIES.filter((a) => a.categories.includes(filter))
 
   const openActivity = (a: Activity) => {
     setOpen(a)
@@ -40,7 +40,7 @@ export function ActivityGrid() {
 
       <div className="mx-auto max-w-grid px-4 py-10 md:px-6 md:py-14">
         <div className="flex flex-wrap items-center justify-center gap-2 md:gap-3">
-          <Chip active={filter === "all"} onClick={() => setFilter("all")} label="All" count={ACTIVITIES.length} />
+          <Chip active={filter === "all"} onClick={() => setFilter("all")} label="All" count={LISTED_ACTIVITIES.length} />
           {CATEGORIES.filter((c) => counts.has(c.id)).map((c) => (
             <Chip
               key={c.id}

@@ -15,6 +15,9 @@ export function SiteHeader() {
           <a href="#how-it-works" className="transition hover:text-white">
             How it works
           </a>
+          <Link href="/faq" className="transition hover:text-white">
+            Questions
+          </Link>
         </nav>
       </div>
     </header>

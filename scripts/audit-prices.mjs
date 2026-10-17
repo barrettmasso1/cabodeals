@@ -38,7 +38,13 @@ const rows = [...catalog.matchAll(/\n {4}id: "([^"]+)",[\s\S]*?\n {4}image:/g)].
     const hit = m[0].match(new RegExp(`${k}: ([\\d.]+),`))
     return hit ? Number(hit[1]) : undefined
   }
-  return { id: m[1], ourPrice: num("ourPrice"), publicPrice: num("publicPrice"), childOurPrice: num("childOurPrice") }
+  return {
+    id: m[1],
+    ourPrice: num("ourPrice"),
+    publicPrice: num("publicPrice"),
+    childOurPrice: num("childOurPrice"),
+    listed: !/listed: false/.test(m[0]),
+  }
 })
 
 if (!rows.length) {
@@ -46,9 +52,10 @@ if (!rows.length) {
   process.exit(2)
 }
 
+const unlisted = rows.filter((r) => !r.listed).map((r) => r.id)
 const problems = []
 const margins = []
-for (const r of rows) {
+for (const r of rows.filter((r) => r.listed)) {
   if (!costs.has(r.id)) {
     problems.push(`${r.id}: no entry in data/activity-costs.ts`)
     continue
@@ -70,7 +77,7 @@ for (const r of rows) {
 }
 for (const id of costs.keys()) if (!rows.some((r) => r.id === id)) problems.push(`${id}: cost on file for an activity not in the catalog`)
 
-console.log(`audit:prices — ${rows.length} activities checked`)
+console.log(`audit:prices — ${rows.filter((r) => r.listed).length} listed activities checked${unlisted.length ? ` (${unlisted.length} held back: ${unlisted.join(", ")})` : ""}`)
 if (problems.length) {
   for (const p of problems) console.error("  ✗ " + p)
   process.exit(1)

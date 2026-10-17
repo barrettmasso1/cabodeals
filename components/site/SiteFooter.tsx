@@ -12,6 +12,9 @@ export function SiteFooter() {
           </a>
         </p>
         <p className="flex items-center gap-4">
+          <Link href="/faq" className="hover:text-charcoal">
+            Questions
+          </Link>
           <Link href="/terms-of-service" className="hover:text-charcoal">
             Terms of Service
           </Link>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { Montserrat, Playfair_Display, Raleway } from "next/font/google"
+import { Analytics } from "@/components/site/Analytics"
 import "./globals.css"
 
 // All three are variable fonts; Playfair only ships 400+, which is what the live site renders
@@ -26,7 +27,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${playfair.variable} ${raleway.variable} ${montserrat.variable}`}>
-      <body>{children}</body>
+      <body>
+        {children}
+        <Analytics />
+      </body>
     </html>
   )
 }
