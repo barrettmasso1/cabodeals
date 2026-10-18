@@ -1,3 +1,4 @@
+import { isAttached } from "@/lib/qualify"
 import { UNLISTED_HOTEL_ID } from "@/lib/hotels"
 import { asksNightlyRate, isRentalPick, isUnlistedPick } from "./lodging"
 import { ageOn, todayIso, visitDateRange } from "./dates"
@@ -13,7 +14,7 @@ export const MAX_DETAIL_ADULTS = 2
 
 export const detailAdults = (s: FormState) => s.adults.slice(0, Math.min(s.totalAdults, MAX_DETAIL_ADULTS))
 
-export const anyMarried = (s: FormState) => detailAdults(s).some((a) => a.maritalStatus === "married")
+export const anyAttached = (s: FormState) => detailAdults(s).some((a) => isAttached(a.maritalStatus))
 
 export const needsStateSelect = (s: FormState) => s.country === "US" || s.country === "CA"
 
@@ -43,7 +44,6 @@ function trip(s: FormState): Errors {
   else if (s.checkOut <= today) e.checkOut = "Check-out needs to be after today."
   else if (s.checkIn && s.checkOut <= s.checkIn) e.checkOut = "Check-out needs to be after check-in."
   if (!s.payingWith) e.payingWith = "Choose one."
-  if (s.stayingAsGuestOfOwner === null) e.stayingAsGuestOfOwner = "Choose one."
   if (s.purchasedAtResortThisTrip === null) e.purchasedAtResortThisTrip = "Choose one."
   if (!s.country) e.country = "Choose one."
   if (needsStateSelect(s) && !s.stateProvince) e.stateProvince = "Choose one."
@@ -65,7 +65,7 @@ function group(s: FormState): Errors {
     if (!a.maritalStatus) e[p + "maritalStatus"] = "Choose one."
     if (!a.gender) e[p + "gender"] = "Choose one."
   })
-  if (anyMarried(s)) {
+  if (anyAttached(s)) {
     if (s.spouseAttending === null) e.spouseAttending = "Please let us know."
     else if (s.spouseAttending && s.totalAdults < 2) e.spouseAttending = "Add your spouse as a second adult above."
   }

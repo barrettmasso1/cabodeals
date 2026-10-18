@@ -29,7 +29,6 @@ export type Attribution = {
 
 /** Yes/No questions the guest must answer explicitly — null until they do. */
 export type YesNoKey =
-  | "stayingAsGuestOfOwner"
   | "purchasedAtResortThisTrip"
   | "spouseAttending"
   | "ownsTimeshare"

@@ -1,0 +1,11 @@
+{
+  "buyer": "solmar",
+  "product": "value_round",
+  "clubsBonus": 100,
+  "tiers": {
+    "A": { "pay": 600, "clubsBonus": 0 },
+    "IM": { "pay": 500 },
+    "B": { "pay": 475 },
+    "C": { "pay": 325, "clubsBonus": 0 }
+  }
+}

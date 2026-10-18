@@ -227,12 +227,14 @@
     "solmarGolferTier": null,
     "solmarTier": null,
     "solmarImOk": false,
-    "questroOk": true,
+    "questroOk": false,
     "questro5Star": false,
     "diamanteOk": false,
     "listaDosOk": false,
     "vgOk": true,
-    "notes": []
+    "notes": [
+      "In-house for Questro: cannot be toured at Puerto Los Cabos."
+    ]
   },
   "casa-dorada-medano": {
     "name": "Casa Dorada at Médano",
@@ -379,10 +381,12 @@
     "solmarImOk": false,
     "questroOk": true,
     "questro5Star": true,
-    "diamanteOk": true,
+    "diamanteOk": false,
     "listaDosOk": false,
     "vgOk": true,
-    "notes": []
+    "notes": [
+      "In-house: guests staying here cannot be sold the golf promotion for this property's own course."
+    ]
   },
   "dreams": {
     "name": "Dreams Los Cabos",
@@ -571,7 +575,7 @@
       "Grand Solmar / Rancho San Lucas",
       "Rancho San Lucas"
     ],
-    "solmarGolferTier": "A",
+    "solmarGolferTier": null,
     "solmarTier": null,
     "solmarImOk": false,
     "questroOk": true,
@@ -579,7 +583,9 @@
     "diamanteOk": true,
     "listaDosOk": false,
     "vgOk": true,
-    "notes": []
+    "notes": [
+      "In-house: guests staying here cannot be sold the golf promotion for this property's own course."
+    ]
   },
   "grand-velas": {
     "name": "Grand Velas Los Cabos",
@@ -726,12 +732,14 @@
     "solmarGolferTier": "C",
     "solmarTier": "C",
     "solmarImOk": false,
-    "questroOk": true,
+    "questroOk": false,
     "questro5Star": true,
     "diamanteOk": true,
     "listaDosOk": true,
     "vgOk": true,
-    "notes": []
+    "notes": [
+      "In-house for Questro: cannot be toured at Puerto Los Cabos."
+    ]
   },
   "krystal-grand": {
     "name": "Krystal Grand Los Cabos",
@@ -1003,12 +1011,14 @@
     "solmarGolferTier": "B",
     "solmarTier": "C",
     "solmarImOk": false,
-    "questroOk": true,
+    "questroOk": false,
     "questro5Star": false,
     "diamanteOk": true,
     "listaDosOk": false,
     "vgOk": true,
-    "notes": []
+    "notes": [
+      "In-house for Questro: cannot be toured at Puerto Los Cabos."
+    ]
   },
   "park-hyatt-cabo-del-sol": {
     "name": "Park Hyatt Cabo del Sol",
@@ -1153,7 +1163,7 @@
       "Playa Grande Resort",
       "The Ridge"
     ],
-    "solmarGolferTier": "A",
+    "solmarGolferTier": null,
     "solmarTier": null,
     "solmarImOk": false,
     "questroOk": true,
@@ -1161,7 +1171,9 @@
     "diamanteOk": true,
     "listaDosOk": false,
     "vgOk": true,
-    "notes": []
+    "notes": [
+      "In-house: guests staying here cannot be sold the golf promotion for this property's own course."
+    ]
   },
   "porto-fino": {
     "name": "Porto Fino",
@@ -1260,12 +1272,14 @@
     "solmarGolferTier": null,
     "solmarTier": null,
     "solmarImOk": false,
-    "questroOk": true,
+    "questroOk": false,
     "questro5Star": true,
     "diamanteOk": true,
     "listaDosOk": true,
     "vgOk": true,
-    "notes": []
+    "notes": [
+      "In-house for Questro: cannot be toured at Puerto Los Cabos."
+    ]
   },
   "riu-baja-california": {
     "name": "Riu Baja California",

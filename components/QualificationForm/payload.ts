@@ -5,7 +5,7 @@
 // toWirePayload() converts every dropdown to GHL's option text ("Married", "2 or more", "Yes").
 
 import { ageAt, qualify, type Lead, type QualifyResult } from "@/lib/qualify"
-import { anyMarried, detailAdults } from "./validate"
+import { anyAttached, detailAdults } from "./validate"
 import { nightsRemaining } from "./dates"
 import { asksNightlyRate, resolveLodging } from "./lodging"
 import type { FormState, Attribution, SubmitResult } from "./types"
@@ -39,9 +39,8 @@ export function toLead(s: FormState, nightsRemaining: number): Lead {
     adults: detailAdults(s),
     nightsRemaining,
     nightlyRate: asksNightlyRate(s) ? s.nightlyRate : null,
-    stayingAsGuestOfOwner: s.stayingAsGuestOfOwner === true,
     purchasedAtResortThisTrip: s.purchasedAtResortThisTrip === true,
-    spouseAttending: anyMarried(s) && s.spouseAttending === true,
+    spouseAttending: anyAttached(s) && s.spouseAttending === true,
     ownsTimeshare: s.ownsTimeshare === true,
     hasHandicapProof: s.hook === "golf" && s.hasHandicapProof === true,
     ownClubs: s.hook === "golf" ? s.ownClubs : null,
@@ -168,7 +167,6 @@ export function toWirePayload(s: FormState, lead: Lead, attribution: Attribution
     checkOut: s.checkOut,
     nightsRemaining: lead.nightsRemaining,
     payingWith: map(PAYING_WITH, s.payingWith),
-    stayingAsGuestOfOwner: yn(s.stayingAsGuestOfOwner),
     purchasedAtResortThisTrip: yn(s.purchasedAtResortThisTrip),
     country: s.country || null,
     stateProvince: s.stateProvince.trim(),
@@ -275,7 +273,6 @@ const ALLOWED: Record<string, readonly string[]> = {
   hotelListaDosOk: YES_NO,
   hotelVgOk: YES_NO,
   isRental: YES_NO,
-  stayingAsGuestOfOwner: YES_NO,
   purchasedAtResortThisTrip: YES_NO,
   spouseAttending: YES_NO,
   ownsTimeshare: YES_NO,

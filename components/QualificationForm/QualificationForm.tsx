@@ -20,7 +20,7 @@ import { buildSubmission, postLead, toPartialPayload, type LeadPayload } from ".
 import { itemSavings, RailSummary, RightRail } from "./RightRail"
 import { track } from "./tracking"
 import type { Attribution, FormState, QualificationFormProps } from "./types"
-import { anyMarried, MAX_DETAIL_ADULTS, needsStateSelect, VALIDATORS, type Errors, type SectionId } from "./validate"
+import { anyAttached, MAX_DETAIL_ADULTS, needsStateSelect, VALIDATORS, type Errors, type SectionId } from "./validate"
 
 const EMPTY_ADULT: Adult = { firstName: "", lastName: "", dateOfBirth: "", maritalStatus: "", gender: "" }
 
@@ -66,7 +66,6 @@ function initialState(p: QualificationFormProps, savingsTotal: number): FormStat
     checkIn: "",
     checkOut: "",
     payingWith: "",
-    stayingAsGuestOfOwner: null,
     purchasedAtResortThisTrip: null,
     country: "",
     stateProvince: "",
@@ -202,7 +201,7 @@ export function QualificationForm(props: QualificationFormProps) {
 
   const today = todayIso()
   const visitRange = visitDateRange(s.checkIn, s.checkOut, today)
-  const married = anyMarried(s)
+  const attached = anyAttached(s)
   const detailCount = Math.min(s.totalAdults, MAX_DETAIL_ADULTS)
   const golf = offer.kind === "golf" ? offer : null
   const rental = isRentalPick(s)
@@ -333,12 +332,6 @@ export function QualificationForm(props: QualificationFormProps) {
             </div>
             <Choice label="How are you paying for your stay?" value={s.payingWith} options={O.PAYING_WITH} error={errors.payingWith} onChange={(v) => set({ payingWith: v })} />
             <YesNo
-              label="Are you staying as the guest of an owner at your resort?"
-              value={s.stayingAsGuestOfOwner}
-              error={errors.stayingAsGuestOfOwner}
-              onChange={(v) => set({ stayingAsGuestOfOwner: v })}
-            />
-            <YesNo
               label="Have you purchased real estate or a vacation ownership program on this trip?"
               value={s.purchasedAtResortThisTrip}
               error={errors.purchasedAtResortThisTrip}
@@ -406,7 +399,7 @@ export function QualificationForm(props: QualificationFormProps) {
               )
             })}
 
-            {married && (
+            {attached && (
               <div
                 className={cn(
                   "rounded-lg border-2 p-4",

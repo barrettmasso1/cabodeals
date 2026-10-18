@@ -15,7 +15,7 @@ type Opt<T> = { value: T; label: string }
 export const PAYING_WITH: Opt<PayingWith>[] = [
   { value: "cash_card", label: "Cash or card" },
   { value: "timeshare_points", label: "Timeshare points" },
-  { value: "hotel_points", label: "Hotel points" },
+  { value: "hotel_points", label: "Hotel or credit card points" },
   { value: "comped", label: "Comped / gifted" },
 ]
 
@@ -28,9 +28,8 @@ export const COUNTRIES: Opt<Country>[] = [
 
 export const MARITAL: Opt<MaritalStatus>[] = [
   { value: "married", label: "Married" },
+  { value: "partnered", label: "In a relationship" },
   { value: "single", label: "Single" },
-  { value: "divorced", label: "Divorced" },
-  { value: "widowed", label: "Widowed" },
 ]
 
 export const GENDER: Opt<Gender>[] = [

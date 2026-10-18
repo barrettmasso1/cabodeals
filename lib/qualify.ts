@@ -2,13 +2,20 @@
 // Pure function. Advisory only: GHL recomputes server-side and is authoritative.
 // Never dispatch transport off the client result.
 
+import SOLMAR_PAY from "@/data/buyers/solmar.json"
+import QUESTRO_PAY from "@/data/buyers/questro.json"
 import type { Hook, SolmarTier } from "@/lib/hotels"
 
 export type Brand = "cabogolf" | "cabodeals"
 export type Product = "value_round" | "collection" | "private_club" | "activities"
 export type Course = "pacific_dunes" | "campestre" | "cabo_real" | "puerto_los_cabos" | "diamante"
 export type Buyer = "solmar" | "questro" | "diamante" | "vg"
-export type MaritalStatus = "married" | "single" | "divorced" | "widowed"
+/**
+ * "partnered" covers living together, engaged, long-term boyfriend/girlfriend — the buyers
+ * treat those the same as married, so the filter does too. Divorced and widowed were options
+ * that changed no outcome, and their presence pushed people in relationships to pick "single".
+ */
+export type MaritalStatus = "married" | "partnered" | "single"
 export type Gender = "male" | "female"
 export type PayingWith = "cash_card" | "timeshare_points" | "hotel_points" | "comped"
 export type CreditCards = "1" | "2plus"
@@ -57,7 +64,6 @@ export type Lead = {
   nightlyRate: number | null // informational; hotel flags are already resolved
   nightsRemaining: number
   payingWith: PayingWith | ""
-  stayingAsGuestOfOwner: boolean
   purchasedAtResortThisTrip: boolean
   country: Country | ""
   stateProvince: string
@@ -84,11 +90,17 @@ export type QualifyResult = {
   nqReasons: string[]
 }
 
+/** Married or partnered — both need the other half present. */
+export const isAttached = (m: MaritalStatus | "") => m === "married" || m === "partnered"
+
 const UNIVERSAL_BLOCKS = (d: Lead): string[] => {
   const b: string[] = []
-  if (d.adults.some((a) => a.maritalStatus === "married") && !d.spouseAttending) b.push("spouse_not_attending")
+  if (d.adults.some((a) => isAttached(a.maritalStatus)) && !d.spouseAttending) b.push("spouse_not_attending")
   if (d.purchasedAtResortThisTrip) b.push("purchased_at_resort") // ASUDESTICO fine risk
-  if (d.stayingAsGuestOfOwner) b.push("in_house_guest")
+  // No transaction behind the stay, no tour — and it reads the same to every buyer, so it belongs
+  // here rather than inside one of them. Timeshare points stay eligible: those were bought.
+  if (d.payingWith === "comped") b.push("comped_stay")
+  if (d.payingWith === "hotel_points") b.push("points_stay")
   if (d.stateProvince === "QC") b.push("quebec")
   return b
 }
@@ -105,6 +117,21 @@ export function ageAt(dob: string, now: number = Date.now()): number | null {
   return ty - by - (tm < bm || (tm === bm && td < bd) ? 1 : 0)
 }
 
+// --- Buyer pay (data/buyers/*.json — see the README there) ---
+
+type TierPay = { pay: number; /** Overrides the buyer default; 0 means this tier earns no bonus. */ clubsBonus?: number }
+type BuyerPay = { clubsBonus: number; tiers: Record<string, TierPay> }
+
+/** "At least one guest brings their own clubs": All or Some — not only All. */
+export const bringsOwnClubs = (d: Pick<Lead, "ownClubs">) => d.ownClubs === "all" || d.ownClubs === "some"
+
+/** Tier pay plus the clubs bonus, for the tiers that earn one. */
+function payFor(buyer: BuyerPay, tier: string, d: Lead): number {
+  const t = buyer.tiers[tier]
+  const bonus = t.clubsBonus ?? buyer.clubsBonus
+  return t.pay + (bringsOwnClubs(d) ? bonus : 0)
+}
+
 const isCouple = (d: Lead) => d.totalAdults >= 2 && d.spouseAttending === true
 const isSingle = (d: Lead) => d.totalAdults === 1
 
@@ -119,9 +146,7 @@ function qualifySolmar(d: Lead, a: number[]): Match | null {
   if (!a.some((x) => x >= band[0] && x <= band[1])) return null
   if ((t === "A" || t === "IM") && !d.ownsTimeshare) return null
   if ((t === "A" || t === "IM") && d.creditCards !== "2plus") return null
-  const clubs = d.ownClubs === "all"
-  const pay = { A: clubs ? 700 : 600, IM: 500, B: 475, C: 325 }[t]
-  return { buyer: "solmar", tier: `MC${t}_golfer${clubs ? "_own_clubs" : ""}`, pay }
+  return { buyer: "solmar", tier: `MC${t}_golfer`, pay: payFor(SOLMAR_PAY, t, d) }
 }
 
 // --- QUESTRO — "The Collection" ---
@@ -129,21 +154,15 @@ function qualifySolmar(d: Lead, a: number[]): Match | null {
 function qualifyQuestro(d: Lead, a: number[]): Match | null {
   if (!d.hotelQuestroOk) return null
   if (d.creditCards !== "2plus") return null
-  if (d.payingWith === "comped" || d.payingWith === "hotel_points") return null
   if (d.nightsRemaining < 3) return null // needs a second morning
   if (isSingle(d)) {
     if (!(a[0] >= 40 && a[0] <= 75)) return null
-    return { buyer: "questro", tier: "single_golfer", pay: 550 }
+    return { buyer: "questro", tier: "single_golfer", pay: payFor(QUESTRO_PAY, "single_golfer", d) }
   }
   if (!isCouple(d)) return null
   if (!a.some((x) => x >= 40 && x <= 75)) return null
-  const clubs = d.ownClubs === "all"
-  const mx = d.country === "MX"
-  return {
-    buyer: "questro",
-    tier: mx ? "mx_couple" : `couple${clubs ? "_own_clubs" : "_rentals"}`,
-    pay: mx ? 400 : clubs ? 700 : 600,
-  }
+  const tier = d.country === "MX" ? "mx_couple" : "couple"
+  return { buyer: "questro", tier, pay: payFor(QUESTRO_PAY, tier, d) }
 }
 
 // --- DIAMANTE — "The Private Club" ---
