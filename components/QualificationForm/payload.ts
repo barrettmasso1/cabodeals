@@ -24,10 +24,21 @@ const OWN_CLUBS = { all: "All", some: "Some", none: "None" } as const
 const TEE_WINDOW = { morning: "Morning", afternoon: "Afternoon", no_preference: "No Preference" } as const
 const VISIT_WINDOW = { first_party: "First Party", second_party: "Second Party", flexible: "Flexible" } as const
 const PROOF_TYPE = { ghin: "GHIN", app_screenshot: "App Screenshot", club_membership: "Club Membership" } as const
-const MARITAL = { married: "Married", single: "Single", divorced: "Divorced", widowed: "Widowed" } as const
+const MARITAL = { married: "Married", partnered: "In A Relationship", single: "Single" } as const
 const GENDER = { male: "Male", female: "Female" } as const
 const QUAL_STATE = { confirmed: "Confirmed", reroute: "Reroute", nq: "NQ" } as const
 const BUYER = { solmar: "Solmar", questro: "Questro", diamante: "Diamante", vg: "VG" } as const
+
+/**
+ * Tags GHL can apply as-is, comma separated: "buyer-vg,state-confirmed".
+ * Buyer and state come straight from the qualify() result — GHL should not re-derive them.
+ */
+function leadTagsFor(q: QualifyResult, extras: string[] = []): string {
+  const tags: string[] = []
+  if (q.assignedBuyer) tags.push(`buyer-${q.assignedBuyer}`)
+  tags.push(`state-${q.qualificationState}`)
+  return [...tags, ...extras].join(",")
+}
 
 const map = <M extends Record<string, string>>(m: M, v: string | null | undefined): M[keyof M] | null =>
   v ? ((m as Record<string, string>)[v] as M[keyof M]) ?? null : null
@@ -87,6 +98,8 @@ function agesOf(s: FormState) {
 export function toPartialPayload(s: FormState, attribution: Attribution) {
   return {
     formStatus: "Incomplete" as FormStatus,
+    // No decision yet — the step-1 lead is tagged so the workflow can exit to nurture.
+    leadTags: "form-incomplete",
 
     // --- source ---
     brand: s.brand,
@@ -143,7 +156,7 @@ export function toWirePayload(s: FormState, lead: Lead, attribution: Attribution
     ...toPartialPayload(s, attribution),
     formStatus: "Complete" as FormStatus,
     // GHL lead_tags is single-line text: comma-separated.
-    tags: [lodging.propertyUnlisted && "hotel-unlisted"].filter(Boolean).join(","),
+    leadTags: leadTagsFor(q, lodging.propertyUnlisted ? ["hotel-unlisted"] : []),
 
     // --- trip ---
     hotelName: s.hotelName.trim(),
