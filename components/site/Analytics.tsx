@@ -1,13 +1,19 @@
 import Script from "next/script"
 
 /**
- * Brief §8. Event names match cabogolf so both brands land in one funnel report; the events
- * themselves are already fired by lib/track.ts and the form's tracker.
+ * Tracking, for both brands. Event names are identical on cabogolf and cabodeals (brief §8),
+ * so the two land in one funnel report.
  *
- * Each container only renders when its id is set, so the site runs clean until the ids land:
- *   NEXT_PUBLIC_GTM_ID          GA4 via Google Tag Manager
- *   NEXT_PUBLIC_META_PIXEL_ID   Meta pixel (CAPI is server-side, set up in GHL)
- *   NEXT_PUBLIC_CLARITY_ID      Microsoft Clarity — the grid and the form
+ * Every tag is driven by an env var and renders nothing when it is absent — local and preview
+ * builds stay out of the production data. Nothing here is hardcoded.
+ *
+ *   NEXT_PUBLIC_GTM_ID          GTM-KGZZ8J7J, the same container on both sites
+ *   NEXT_PUBLIC_META_PIXEL_ID   559021177260287, the same pixel on both sites
+ *   NEXT_PUBLIC_CLARITY_ID      a different id per site: cabogolf yzd8qx6tlt, cabodeals z1hyt76fci
+ *
+ * The pixel lives here rather than in GTM on purpose: the server-side Lead in lib/metaCapi.ts
+ * has to share an event_id with the browser event so Meta deduplicates them, and threading
+ * that id through a tag manager is needless work.
  */
 export function Analytics() {
   const gtm = process.env.NEXT_PUBLIC_GTM_ID
@@ -41,6 +47,37 @@ t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,do
 t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
 y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","${clarity}");`}
         </Script>
+      )}
+    </>
+  )
+}
+
+/**
+ * Meta's documented <noscript><img> fallback is deliberately NOT here. Chrome's preload scanner
+ * fetches an <img src> it finds while parsing even inside <noscript>, so with JavaScript enabled
+ * the fallback fires alongside the real pixel and every visitor is counted twice. Measured on a
+ * production build: two requests to facebook.com/tr, one of them carrying noscript=1. The GTM
+ * iframe below is safe — iframes are not preload-scanned, so it stays.
+ *
+ * The no-JS halves. These are plain markup, not scripts, and GTM's iframe has to be the FIRST
+ * thing inside <body> or it does not fire for visitors without JavaScript — which is why this
+ * is a separate component from the scripts above.
+ */
+export function TrackingNoScript() {
+  const gtm = process.env.NEXT_PUBLIC_GTM_ID
+
+  return (
+    <>
+      {gtm && (
+        <noscript>
+          <iframe
+            src={`https://www.googletagmanager.com/ns.html?id=${gtm}`}
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+            title="Google Tag Manager"
+          />
+        </noscript>
       )}
     </>
   )
