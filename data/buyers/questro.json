@@ -1,0 +1,10 @@
+{
+  "buyer": "questro",
+  "product": "collection",
+  "clubsBonus": 100,
+  "tiers": {
+    "single_golfer": { "pay": 550 },
+    "couple": { "pay": 600 },
+    "mx_couple": { "pay": 400 }
+  }
+}

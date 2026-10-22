@@ -1,21 +1,39 @@
+"use client"
+
+import { useHeroVideo } from "@/lib/useHeroVideo"
+
 /**
- * Hero copy is brief §7, verbatim. The background video is the one the live site already
- * serves from the GHL media bucket.
+ * Hero copy is brief §7, verbatim.
+ *
+ * The background video is ~11MB, which is a cruel thing to send a phone on hotel wifi — and it
+ * is decoration: the poster carries the same picture. So phones, metered or slow connections and
+ * reduced-motion visitors keep the still, and only wide screens fetch the video.
  */
 const HERO_VIDEO = "https://storage.googleapis.com/msgsndr/U3n8dRDsSZeqRHzv2q4c/media/68716976556bb06e6aadf494.mp4"
+const HERO_POSTER = "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1.jfif-fFb8e9i1VW3yvYjHmrP87gsm26YTam.jpeg"
 
 export function Hero() {
+  const videoAllowed = useHeroVideo()
+
   return (
     <section className="relative flex min-h-[560px] items-center justify-center overflow-hidden bg-ink md:min-h-[620px]">
-      <video
-        className="absolute inset-0 h-full w-full object-cover"
-        src={HERO_VIDEO}
-        autoPlay
-        muted
-        loop
-        playsInline
-        aria-hidden
-      />
+      {/* eslint-disable-next-line @next/next/no-img-element -- photography still lives in the old site's blob store */}
+      <img src={HERO_POSTER} alt="" className="absolute inset-0 h-full w-full object-cover" fetchPriority="high" />
+
+      {videoAllowed && (
+        <video
+          className="absolute inset-0 h-full w-full object-cover"
+          src={HERO_VIDEO}
+          poster={HERO_POSTER}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="none"
+          aria-hidden
+        />
+      )}
+
       <div className="absolute inset-0 bg-black/45" aria-hidden />
 
       <div className="relative mx-auto max-w-3xl px-5 pb-16 pt-28 text-center text-white md:pb-20 md:pt-32">

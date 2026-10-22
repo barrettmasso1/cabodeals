@@ -5,7 +5,7 @@
 // toWirePayload() converts every dropdown to GHL's option text ("Married", "2 or more", "Yes").
 
 import { ageAt, qualify, type Lead, type QualifyResult } from "@/lib/qualify"
-import { anyMarried, detailAdults } from "./validate"
+import { anyAttached, detailAdults } from "./validate"
 import { nightsRemaining } from "./dates"
 import { asksNightlyRate, resolveLodging } from "./lodging"
 import type { FormState, Attribution, SubmitResult } from "./types"
@@ -24,10 +24,21 @@ const OWN_CLUBS = { all: "All", some: "Some", none: "None" } as const
 const TEE_WINDOW = { morning: "Morning", afternoon: "Afternoon", no_preference: "No Preference" } as const
 const VISIT_WINDOW = { first_party: "First Party", second_party: "Second Party", flexible: "Flexible" } as const
 const PROOF_TYPE = { ghin: "GHIN", app_screenshot: "App Screenshot", club_membership: "Club Membership" } as const
-const MARITAL = { married: "Married", single: "Single", divorced: "Divorced", widowed: "Widowed" } as const
+const MARITAL = { married: "Married", partnered: "In A Relationship", single: "Single" } as const
 const GENDER = { male: "Male", female: "Female" } as const
 const QUAL_STATE = { confirmed: "Confirmed", reroute: "Reroute", nq: "NQ" } as const
 const BUYER = { solmar: "Solmar", questro: "Questro", diamante: "Diamante", vg: "VG" } as const
+
+/**
+ * Tags GHL can apply as-is, comma separated: "buyer-vg,state-confirmed".
+ * Buyer and state come straight from the qualify() result — GHL should not re-derive them.
+ */
+function leadTagsFor(q: QualifyResult, extras: string[] = []): string {
+  const tags: string[] = []
+  if (q.assignedBuyer) tags.push(`buyer-${q.assignedBuyer}`)
+  tags.push(`state-${q.qualificationState}`)
+  return [...tags, ...extras].join(",")
+}
 
 const map = <M extends Record<string, string>>(m: M, v: string | null | undefined): M[keyof M] | null =>
   v ? ((m as Record<string, string>)[v] as M[keyof M]) ?? null : null
@@ -39,9 +50,8 @@ export function toLead(s: FormState, nightsRemaining: number): Lead {
     adults: detailAdults(s),
     nightsRemaining,
     nightlyRate: asksNightlyRate(s) ? s.nightlyRate : null,
-    stayingAsGuestOfOwner: s.stayingAsGuestOfOwner === true,
     purchasedAtResortThisTrip: s.purchasedAtResortThisTrip === true,
-    spouseAttending: anyMarried(s) && s.spouseAttending === true,
+    spouseAttending: anyAttached(s) && s.spouseAttending === true,
     ownsTimeshare: s.ownsTimeshare === true,
     hasHandicapProof: s.hook === "golf" && s.hasHandicapProof === true,
     ownClubs: s.hook === "golf" ? s.ownClubs : null,
@@ -53,7 +63,25 @@ export type FormStatus = "Incomplete" | "Complete"
 
 export type PartialWirePayload = ReturnType<typeof toPartialPayload>
 export type WirePayload = ReturnType<typeof toWirePayload>
-export type LeadPayload = PartialWirePayload | WirePayload
+/**
+ * Tracking identifiers ride along with the lead. They are not GHL fields — the webhook ignores
+ * unmapped keys — but /api/lead reads them to send the matching Meta Conversions API event.
+ */
+export type TrackingMeta = { metaEventId?: string; fbp?: string; fbc?: string }
+
+export type LeadPayload = (PartialWirePayload | WirePayload) & TrackingMeta
+
+/**
+ * Human-readable twins of `product` and `course`, which go over the wire as snake_case. GHL
+ * reads these straight into the opportunity name. cabogolf sends the same two fields; without
+ * them a merged workflow names activity opportunities off a blank.
+ */
+const PRODUCT_LABEL: Record<string, string> = {
+  value_round: "The Value Round",
+  collection: "The Collection",
+  private_club: "The Private Club",
+  activities: "Activities",
+}
 
 const cartOf = (s: FormState) => {
   const cartItems = s.hook === "activities" ? s.cartItems : []
@@ -88,11 +116,15 @@ function agesOf(s: FormState) {
 export function toPartialPayload(s: FormState, attribution: Attribution) {
   return {
     formStatus: "Incomplete" as FormStatus,
+    // No decision yet — the step-1 lead is tagged so the workflow can exit to nurture.
+    leadTags: "form-incomplete",
 
     // --- source ---
     brand: s.brand,
     hook: s.hook,
     product: s.product,
+    productName: PRODUCT_LABEL[s.product] ?? s.product,
+    courseName: "", // activities have no course; the field stays present so both brands match
     course: s.course,
     market: s.market,
     ...attribution,
@@ -144,7 +176,7 @@ export function toWirePayload(s: FormState, lead: Lead, attribution: Attribution
     ...toPartialPayload(s, attribution),
     formStatus: "Complete" as FormStatus,
     // GHL lead_tags is single-line text: comma-separated.
-    tags: [lodging.propertyUnlisted && "hotel-unlisted"].filter(Boolean).join(","),
+    leadTags: leadTagsFor(q, lodging.propertyUnlisted ? ["hotel-unlisted"] : []),
 
     // --- trip ---
     hotelName: s.hotelName.trim(),
@@ -168,7 +200,6 @@ export function toWirePayload(s: FormState, lead: Lead, attribution: Attribution
     checkOut: s.checkOut,
     nightsRemaining: lead.nightsRemaining,
     payingWith: map(PAYING_WITH, s.payingWith),
-    stayingAsGuestOfOwner: yn(s.stayingAsGuestOfOwner),
     purchasedAtResortThisTrip: yn(s.purchasedAtResortThisTrip),
     country: s.country || null,
     stateProvince: s.stateProvince.trim(),
@@ -275,7 +306,6 @@ const ALLOWED: Record<string, readonly string[]> = {
   hotelListaDosOk: YES_NO,
   hotelVgOk: YES_NO,
   isRental: YES_NO,
-  stayingAsGuestOfOwner: YES_NO,
   purchasedAtResortThisTrip: YES_NO,
   spouseAttending: YES_NO,
   ownsTimeshare: YES_NO,
