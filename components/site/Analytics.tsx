@@ -53,13 +53,18 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document
 }
 
 /**
+ * Meta's documented <noscript><img> fallback is deliberately NOT here. Chrome's preload scanner
+ * fetches an <img src> it finds while parsing even inside <noscript>, so with JavaScript enabled
+ * the fallback fires alongside the real pixel and every visitor is counted twice. Measured on a
+ * production build: two requests to facebook.com/tr, one of them carrying noscript=1. The GTM
+ * iframe below is safe — iframes are not preload-scanned, so it stays.
+ *
  * The no-JS halves. These are plain markup, not scripts, and GTM's iframe has to be the FIRST
  * thing inside <body> or it does not fire for visitors without JavaScript — which is why this
  * is a separate component from the scripts above.
  */
 export function TrackingNoScript() {
   const gtm = process.env.NEXT_PUBLIC_GTM_ID
-  const pixel = process.env.NEXT_PUBLIC_META_PIXEL_ID
 
   return (
     <>
@@ -71,18 +76,6 @@ export function TrackingNoScript() {
             width="0"
             style={{ display: "none", visibility: "hidden" }}
             title="Google Tag Manager"
-          />
-        </noscript>
-      )}
-      {pixel && (
-        <noscript>
-          {/* eslint-disable-next-line @next/next/no-img-element -- Meta's documented no-JS fallback */}
-          <img
-            height="1"
-            width="1"
-            style={{ display: "none" }}
-            src={`https://www.facebook.com/tr?id=${pixel}&ev=PageView&noscript=1`}
-            alt=""
           />
         </noscript>
       )}
