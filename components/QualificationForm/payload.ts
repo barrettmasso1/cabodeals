@@ -63,7 +63,25 @@ export type FormStatus = "Incomplete" | "Complete"
 
 export type PartialWirePayload = ReturnType<typeof toPartialPayload>
 export type WirePayload = ReturnType<typeof toWirePayload>
-export type LeadPayload = PartialWirePayload | WirePayload
+/**
+ * Tracking identifiers ride along with the lead. They are not GHL fields — the webhook ignores
+ * unmapped keys — but /api/lead reads them to send the matching Meta Conversions API event.
+ */
+export type TrackingMeta = { metaEventId?: string; fbp?: string; fbc?: string }
+
+export type LeadPayload = (PartialWirePayload | WirePayload) & TrackingMeta
+
+/**
+ * Human-readable twins of `product` and `course`, which go over the wire as snake_case. GHL
+ * reads these straight into the opportunity name. cabogolf sends the same two fields; without
+ * them a merged workflow names activity opportunities off a blank.
+ */
+const PRODUCT_LABEL: Record<string, string> = {
+  value_round: "The Value Round",
+  collection: "The Collection",
+  private_club: "The Private Club",
+  activities: "Activities",
+}
 
 const cartOf = (s: FormState) => {
   const cartItems = s.hook === "activities" ? s.cartItems : []
@@ -105,6 +123,8 @@ export function toPartialPayload(s: FormState, attribution: Attribution) {
     brand: s.brand,
     hook: s.hook,
     product: s.product,
+    productName: PRODUCT_LABEL[s.product] ?? s.product,
+    courseName: "", // activities have no course; the field stays present so both brands match
     course: s.course,
     market: s.market,
     ...attribution,

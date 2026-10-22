@@ -18,7 +18,7 @@ import { asksNightlyRate, isRentalPick, isUnlistedPick, NO_HOTEL_FLAGS, resolveL
 import * as O from "./options"
 import { buildSubmission, postLead, toPartialPayload, type LeadPayload } from "./payload"
 import { itemSavings, RailSummary, RightRail } from "./RightRail"
-import { track } from "./tracking"
+import { metaCookies, track } from "./tracking"
 import type { Attribution, FormState, QualificationFormProps } from "./types"
 import { anyAttached, MAX_DETAIL_ADULTS, needsStateSelect, VALIDATORS, type Errors, type SectionId } from "./validate"
 
@@ -121,10 +121,20 @@ export function QualificationForm(props: QualificationFormProps) {
   const setAdult = (i: number, patch: Partial<Adult>) =>
     setS((prev) => ({ ...prev, adults: prev.adults.map((a, j) => (j === i ? { ...a, ...patch } : a)) }))
 
+  // One id for this form session. The pixel and the Conversions API both report the Lead with
+  // it, and Meta counts the pair once instead of twice.
+  const metaEventId = useRef<string>("")
+  if (!metaEventId.current) {
+    metaEventId.current =
+      typeof crypto !== "undefined" && crypto.randomUUID
+        ? crypto.randomUUID()
+        : `lead-${Date.now()}-${Math.random().toString(16).slice(2)}`
+  }
+
   const fireOnce = (event: Parameters<typeof track>[0], params: Record<string, unknown>) => {
     if (fired.current.has(event)) return
     fired.current.add(event)
-    track(event, params)
+    track(event, params, event === "lead" ? metaEventId.current : undefined)
   }
 
   const deliver = (payload: LeadPayload) => (send ? send(payload) : postLead(payload, endpoint))
@@ -159,7 +169,7 @@ export function QualificationForm(props: QualificationFormProps) {
       // Partial lead: retargetable in GHL even if they abandon now. Never blocks the form.
       if (!fired.current.has("partial_post")) {
         fired.current.add("partial_post")
-        deliver(toPartialPayload(s, attribution.current)).catch((err) =>
+        deliver({ ...toPartialPayload(s, attribution.current), metaEventId: metaEventId.current, ...metaCookies() }).catch((err) =>
           console.error("[QualificationForm] step-1 post failed", err),
         )
       }

@@ -1,6 +1,7 @@
 import { createHash } from "node:crypto"
 import { NextResponse } from "next/server"
 import { validatePayload } from "@/components/QualificationForm/payload"
+import { capiConfigured, sendCapiLead } from "@/lib/metaCapi"
 
 // Forwards <QualificationForm /> submissions to the GHL inbound webhook.
 // GHL_WEBHOOK_URL must be the …/7e017bdf… endpoint — never the legacy …/149c988d… Pacific Dunes one.
@@ -116,5 +117,29 @@ export async function POST(request: Request) {
   }
 
   console.log(`[lead ${requestId}] webhook accepted in ${ms}ms`)
-  return NextResponse.json({ ok: true, requestId })
+
+  // Server-side Lead for Meta, sharing the browser pixel's eventId so the two deduplicate.
+  // The pixel loses a real share of conversions to ad blockers and iOS tracking prevention,
+  // which is exactly the signal a campaign needs. Only the step-1 payload carries the id.
+  let capi: { sent: boolean; reason?: string } = { sent: false, reason: "not_configured" }
+  if (typeof payload.metaEventId === "string" && payload.metaEventId && capiConfigured()) {
+    const str = (v: unknown) => (typeof v === "string" && v ? v : undefined)
+    capi = await sendCapiLead({
+      eventId: payload.metaEventId,
+      email: str(payload.email),
+      phone: str(payload.phone),
+      firstName: str(payload.firstName),
+      lastName: str(payload.lastName),
+      state: str(payload.stateProvince),
+      country: str(payload.country),
+      sourceUrl: str(payload.landingPage),
+      clientIp: request.headers.get("x-forwarded-for")?.split(",")[0]?.trim(),
+      userAgent: request.headers.get("user-agent") ?? undefined,
+      fbp: typeof payload.fbp === "string" ? payload.fbp : undefined,
+      fbc: typeof payload.fbc === "string" ? payload.fbc : undefined,
+    })
+    console.log(`[lead ${requestId}] meta capi sent=${capi.sent}${capi.reason ? ` reason=${capi.reason}` : ""}`)
+  }
+
+  return NextResponse.json({ ok: true, requestId, capi: capi.sent })
 }

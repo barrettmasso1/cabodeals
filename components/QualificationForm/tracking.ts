@@ -7,13 +7,24 @@ type TrackWindow = Window & {
   fbq?: (...args: unknown[]) => void
 }
 
-export function track(event: FormEvent, params: Record<string, unknown> = {}) {
+/** Reads the Meta cookies the pixel sets; they materially improve CAPI match quality. */
+export function metaCookies(): { fbp?: string; fbc?: string } {
+  if (typeof document === "undefined") return {}
+  const get = (k: string) => document.cookie.match(new RegExp(`(?:^|; )${k}=([^;]*)`))?.[1]
+  return { fbp: get("_fbp"), fbc: get("_fbc") }
+}
+
+/**
+ * `eventId` is only meaningful on "lead": it is passed to the pixel as eventID so Meta can
+ * deduplicate it against the same event arriving from the Conversions API.
+ */
+export function track(event: FormEvent, params: Record<string, unknown> = {}, eventId?: string) {
   if (typeof window === "undefined") return
   const w = window as TrackWindow
   w.dataLayer = w.dataLayer || []
   w.dataLayer.push({ event, ...params })
   if (w.fbq) {
-    if (event === "lead") w.fbq("track", "Lead", params)
+    if (event === "lead") w.fbq("track", "Lead", params, eventId ? { eventID: eventId } : undefined)
     else w.fbq("trackCustom", event, params)
   }
 }
