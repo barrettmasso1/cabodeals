@@ -5,19 +5,24 @@ import { useHeroVideo } from "@/lib/useHeroVideo"
 /**
  * Hero copy is brief §7, verbatim.
  *
- * The background video is ~11MB, which is a cruel thing to send a phone on hotel wifi — and it
- * is decoration: the poster carries the same picture. So phones, metered or slow connections and
- * reduced-motion visitors keep the still, and only wide screens fetch the video.
+ * The background video is 10.74MB — 1280x720, 30s, about 3 Mbps, which is roughly twice the
+ * bitrate this footage needs. It is decoration: the poster is a frame from the video itself, so
+ * the hero looks right whether or not the video ever arrives. Phones, metered or slow
+ * connections and reduced-motion visitors keep the still and request no video at all.
+ *
+ * The headline sits on its own scrim, so it is legible against the poster, the video, or a
+ * blank background if both fail.
  */
 const HERO_VIDEO = "https://storage.googleapis.com/msgsndr/U3n8dRDsSZeqRHzv2q4c/media/68716976556bb06e6aadf494.mp4"
-const HERO_POSTER = "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1.jfif-fFb8e9i1VW3yvYjHmrP87gsm26YTam.jpeg"
+/** A real frame from the video (1280x720, 119KB), served from this repo so it paints at once. */
+const HERO_POSTER = "/images/hero-poster.jpg"
 
 export function Hero() {
   const videoAllowed = useHeroVideo()
 
   return (
     <section className="relative flex min-h-[560px] items-center justify-center overflow-hidden bg-ink md:min-h-[620px]">
-      {/* eslint-disable-next-line @next/next/no-img-element -- photography still lives in the old site's blob store */}
+      {/* eslint-disable-next-line @next/next/no-img-element -- a plain <img> so it paints before hydration */}
       <img src={HERO_POSTER} alt="" className="absolute inset-0 h-full w-full object-cover" fetchPriority="high" />
 
       {videoAllowed && (

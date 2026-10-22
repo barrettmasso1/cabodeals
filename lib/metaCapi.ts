@@ -11,9 +11,12 @@ import { createHash } from "node:crypto"
  * counted once — without it every conversion would be double-counted and the campaign would
  * optimise against inflated numbers.
  *
- * Ported from cabogolf — keep the two in step. The one deliberate difference: no hardcoded
- * pixel id. Set META_PIXEL_ID (server) and NEXT_PUBLIC_META_PIXEL_ID (browser) to the same
- * value, whether that is cabogolf's pixel or one of this brand's own.
+ * Identical in both repos — keep them in step. No pixel id is hardcoded anywhere:
+ *   META_CAPI_TOKEN            the access token. Secret: never NEXT_PUBLIC_.
+ *   META_PIXEL_ID              optional; falls back to NEXT_PUBLIC_META_PIXEL_ID so one id
+ *                              serves the browser and the server and they cannot drift.
+ * META_CAPI_ACCESS_TOKEN is still read, so an environment set up before the rename keeps
+ * working.
  *
  * Personal data is SHA-256 hashed before it leaves this process, which is what Meta requires and
  * what we'd want anyway. Nothing identifiable is sent in the clear.
@@ -44,18 +47,23 @@ export type CapiLead = {
 
 export type CapiResult = { sent: boolean; reason?: string; status?: number }
 
+/** The browser pixel's id, reused server-side so both halves report to the same pixel. */
+const pixelId = () => process.env.META_PIXEL_ID || process.env.NEXT_PUBLIC_META_PIXEL_ID
+/** Secret — deliberately NOT NEXT_PUBLIC_, which would ship it to the browser. */
+const accessToken = () => process.env.META_CAPI_TOKEN || process.env.META_CAPI_ACCESS_TOKEN
+
 export function capiConfigured(): boolean {
-  return !!(process.env.META_CAPI_ACCESS_TOKEN && process.env.META_PIXEL_ID)
+  return !!(accessToken() && pixelId())
 }
 
 /**
  * Never throws and never blocks the caller's own work — a Meta outage must not cost us a lead.
  */
 export async function sendCapiLead(lead: CapiLead): Promise<CapiResult> {
-  const token = process.env.META_CAPI_ACCESS_TOKEN
-  const pixelId = process.env.META_PIXEL_ID
+  const token = accessToken()
+  const id = pixelId()
   if (!token) return { sent: false, reason: "no_access_token" }
-  if (!pixelId) return { sent: false, reason: "no_pixel_id" }
+  if (!id) return { sent: false, reason: "no_pixel_id" }
 
   const user: Record<string, string[] | string> = {}
   if (lead.email) user.em = [hash(norm(lead.email))]
@@ -88,7 +96,7 @@ export async function sendCapiLead(lead: CapiLead): Promise<CapiResult> {
   try {
     const controller = new AbortController()
     const timer = setTimeout(() => controller.abort(), 5000)
-    const res = await fetch(`https://graph.facebook.com/${API_VERSION}/${pixelId}/events?access_token=${token}`, {
+    const res = await fetch(`https://graph.facebook.com/${API_VERSION}/${id}/events?access_token=${token}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),

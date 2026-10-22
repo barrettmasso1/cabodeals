@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import { Montserrat, Playfair_Display, Raleway } from "next/font/google"
-import { Analytics } from "@/components/site/Analytics"
+import { Analytics, TrackingNoScript } from "@/components/site/Analytics"
 import "./globals.css"
 
 // All three are variable fonts; Playfair only ships 400+, which is what the live site renders
@@ -28,6 +28,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${playfair.variable} ${raleway.variable} ${montserrat.variable}`}>
       <body>
+        {/* GTM's noscript iframe has to be the first element in the body to fire at all. */}
+        <TrackingNoScript />
         {children}
         <Analytics />
       </body>
